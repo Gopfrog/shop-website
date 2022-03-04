@@ -4,10 +4,8 @@ import { Product } from "./api/products"
 export async function getServerSideProps() {
 
   const res = await fetch('http://localhost:3000/api/products')
-  const json = await res.text()
-  const products: Array<Product> = JSON.parse(json)
-
-  console.log(products[0].id)
+  const data = await res.json()
+  const products: Array<Product> = data.products
 
   return {
     props: {
@@ -16,15 +14,21 @@ export async function getServerSideProps() {
   }
 }
 
-const Home = async ({products}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  console.log(products)
+const Home = ({products}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
   <>
   <h1>
     Homepage
   </h1>
   <h3>Produkte</h3>
-
+  {
+    products.map((product) => (
+      <>
+        <h3>{ product.id + product.name }</h3>
+        <small>{product.weight}</small>
+      </>
+    ))
+  }
   
   </>)
 }

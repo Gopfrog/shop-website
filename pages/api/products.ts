@@ -17,9 +17,7 @@ export default function handler(req: any, res: any) {
     products.push(product)
   }
 
-  
-  console.log(products.length)
   res.json({
     products: products
-  }).send()
+  })
 }
