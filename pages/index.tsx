@@ -23,10 +23,10 @@ const Home = ({products}: InferGetServerSidePropsType<typeof getServerSideProps>
   <h3>Produkte</h3>
   {
     products.map((product) => (
-      <>
+      <div key={"product-" + product.id}>
         <h3>{ product.id + product.name }</h3>
         <small>{product.weight}</small>
-      </>
+      </div>
     ))
   }
   
